@@ -7,7 +7,7 @@ const Layout =({title,descr, urlBg, colorBg})=>{
 
     const stylesd ={
         background: colorBg,
-        backgroundImage: <bg1/>
+        backgroundImage: `url(${urlBg})`
     };
     return(
         <section className={s.root} style={stylesd} >
