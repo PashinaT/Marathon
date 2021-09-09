@@ -10,9 +10,9 @@ function App() {
   return (
     <div className="App">
         <Header title={"Марафонный заголовок!"} descr={"Прикольно атрибутики внутри создавать"} />
-        <Layout title={"Слой 1"} urlBg={bg1}  />
-        <Layout title={"Слой 2"} colorBg={'red'}/>
-        <Layout title={"Слой 3"} urlBg={bg1}/>
+        <Layout title={"Слой 1"} urlBg={bg1} descr={"мяу"} />
+        <Layout title={"Слой 2"} colorBg={'red'} descr={"мяу"}/>
+        <Layout title={"Слой 3"} urlBg={bg1} descr={"мяу"}/>
         <Footer />
     </div>
   );

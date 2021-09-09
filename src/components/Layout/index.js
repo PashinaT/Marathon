@@ -2,9 +2,6 @@ import s from "./style.module.css"
 import bg1 from "../../assets/bg1.jpg"
 
 const Layout =({title,descr, urlBg, colorBg})=>{
-    console.log(colorBg);
-    console.log(urlBg);
-
     const stylesd ={
         background: colorBg,
         backgroundImage: `url(${urlBg})`
