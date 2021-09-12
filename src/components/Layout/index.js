@@ -1,11 +1,13 @@
 import s from "./style.module.css"
 import bg1 from "../../assets/bg1.jpg"
 
-const Layout =({title,descr, urlBg, colorBg})=>{
+const Layout =({title,descr, urlBg, colorBg, children})=>{
     const stylesd ={
         background: colorBg,
         backgroundImage: `url(${urlBg})`
     };
+    console.log("what inside")
+    console.log(children);
     return(
         <section className={s.root} style={stylesd} >
             <div className={s.wrapper}>
@@ -15,7 +17,7 @@ const Layout =({title,descr, urlBg, colorBg})=>{
                         <span className={s.separator}/>
                     </div>
                     <div className={[s.desc, s.full]}>
-                        <p>{descr}</p>
+                        {children}
                     </div>
                 </article>
             </div>
