@@ -1,5 +1,6 @@
 import s from "./style.module.css"
 import bg1 from "../../assets/bg1.jpg"
+import cn from 'classnames'
 
 const Layout =({title,descr, urlBg, colorBg, children})=>{
     const stylesd ={
