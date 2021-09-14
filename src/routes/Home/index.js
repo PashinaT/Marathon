@@ -26,7 +26,7 @@ function HomePage({onChangePage}) {
             <Layout title={"Слой 2"} colorBg={'red'} descr={"мяу"}>
                 <div className={f.flex}>
                     {
-                        pokemons.map(item=><PokemonCard key={item.id} {...item}/>)
+                        pokemons.map(item=><PokemonCard key={item.id} name={item.name} img={item.img} id={item.id} type ={ item.type} values={item.values}/>)
                     }
                 </div>
             </Layout>
