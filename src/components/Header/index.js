@@ -1,5 +1,4 @@
 import s from "./style.module.css"
-import MenuHeader from "../MenuHeader";
 const Header =({title,descr, onClickButton})=>{
     const handleClick = () =>{
         onClickButton && onClickButton('game');
@@ -9,7 +8,6 @@ const Header =({title,descr, onClickButton})=>{
             <div className={s.forest}>
             </div>
             <div className={s.container}>
-                <MenuHeader/>
                 <h1>{title}</h1>
                 <p>{descr}</p>
                 <button onClick={handleClick}>

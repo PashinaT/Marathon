@@ -2,6 +2,7 @@ import './style.module.css';
 import Header from '../../components/Header'
 import Layout from '../../components/Layout'
 import Footer from '../../components/Footer'
+import MenuHeader from "../../components/MenuHeader";
 
 import bg1 from '../../assets/bg1.jpg';
 import PokemonCard from "../../components/PokemonCard";
@@ -15,6 +16,7 @@ function HomePage({onChangePage}) {
     };
     return (
         <div className="App">
+            <MenuHeader/>
             <Header title={"Марафонный заголовок!"}
                     descr={"Прикольно атрибутики внутри создавать"}
                     onClickButton={handleClickButton}/>
