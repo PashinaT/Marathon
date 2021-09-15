@@ -4,15 +4,15 @@ import {useState} from 'react'
 
 const MenuHeader =()=>{
 
-    const [isActive, setActive] = useState(false);
-    const handleClick = (isActive) =>{
-        setActive(!isActive)
-    }
+    const [isActive, setActive] = useState(null);
+    const handleClick = () =>{
+        setActive(isActive => !isActive)
+    };
 
     return(
         <>
         <Menu isActive={isActive}/>
-        <Navbar handleClick={handleClick} isActive={isActive}/>
+        <Navbar handleClick={handleClick} isActive={isActive} />
         </>
     )
 };
