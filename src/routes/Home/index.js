@@ -16,7 +16,6 @@ function HomePage({onChangePage}) {
     };
     return (
         <div className="App">
-            <MenuHeader/>
             <Header title={"Марафонный заголовок!"}
                     descr={"Прикольно атрибутики внутри создавать"}
                     onClickButton={handleClickButton}/>
@@ -33,7 +32,6 @@ function HomePage({onChangePage}) {
                 </div>
             </Layout>
             <Layout title={"Слой 3"} urlBg={bg1} descr={"мяу"}/>
-            <Footer />
         </div>
     );
 }
