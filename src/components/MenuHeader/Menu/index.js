@@ -1,5 +1,6 @@
 import s from "./style.module.css"
 import cn from 'classnames'
+import {Link} from 'react-router-dom'
 
 const Menu =({isActive})=>{
     return(
@@ -9,24 +10,24 @@ const Menu =({isActive})=>{
             <div className={s.menuItems}>
                 <ul>
                     <li>
-                        <a href="#welcome">
+                        <Link to="/home">
                             HOME
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#game">
+                        <Link to="/game">
                             GAME
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#about">
+                        <Link to="/about">
                             ABOUT
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#contact">
+                        <Link to="/contact">
                             CONTACT
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
