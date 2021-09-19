@@ -2,32 +2,46 @@ import s from "./style.module.css"
 import d from "../../data.json"
 import f from "../Home/style.module.css";
 import PokemonCard from "../../components/PokemonCard";
-
-import { useState } from 'react';
+import database from "../../service/firebase";
+import { useState, useEffect } from 'react';
 
 
 const GamePage =()=>{
-    const pokemons=d;
-    const [openedPokemons, setOpenPokemons]= useState(pokemons);
+    const [openedPokemons, setOpenPokemons]= useState({});
     const updateOpenedPockemons = (id)=>
     {
-        setOpenPokemons(pokemons.map(poc => {
-            if (poc.id===id)
-                poc.active=!poc.active;
-            return poc;
-        })
-
-    )
+        setOpenPokemons(prevState => {
+            return Object.entries(prevState).reduce((acc, item) => {
+                const pokemon = {...item[1]};
+                if (pokemon.id === id) {
+                    pokemon.active = true;
+                    database.ref('pokemons/'+ item[0]).update({
+                        active:true
+                    });
+                };
+                acc[item[0]] = pokemon;
+                return acc;
+            }, {});
+        });
     };
+
+    const addPokemon = ()=>{
+        const newPokemon = database.ref().child('pokemons').push().key;
+    };
+
+    useEffect(()=>{
+        database.ref('pokemons').once('value', (snapshot)=>{
+            setOpenPokemons(snapshot.val());
+        });
+    },[]);
 return(
-        <div className={s.wrapper}>
-            <p>Future game page</p>
+
             <div className={f.flex}>
                 {
-                    openedPokemons.map(item=><PokemonCard key={item.id} onChangePockemon={()=> updateOpenedPockemons(item.id)} isActive={item.active}  name={item.name} img={item.img} id={item.id} type ={ item.type} values={item.values}/>)
+                    Object.entries(openedPokemons).map(([key,{name,img,id,type,values,active}])=>
+                        <PokemonCard key={key} onChangePockemon={()=> updateOpenedPockemons(id)} isActive={active}  name={name} img={img} id={id} type ={ type} values={values}/>)
                 }
             </div>
-        </div>
 )
 };
 

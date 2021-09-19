@@ -14,10 +14,10 @@ const handleClick = ()=>{
                     <div className={cn(s.wrap, s.front)}>
                         <div className={cn(s.pokemon, s[type])}>
                             <div className={s.values}>
-                                <div className={cn(s.count, s.top)}>{values.top}</div>
-                                <div className={cn(s.count, s.right)}>{values.right}</div>
-                                <div className={cn(s.count, s.bottom)}>{values.bottom}</div>
-                                <div className={cn(s.count, s.left)}>{values.left}></div>
+                                <div className={cn(s.count, s.top)}>{values!==undefined?values.top:null}</div>
+                                <div className={cn(s.count, s.right)}>{values!==undefined?values.right:null}</div>
+                                <div className={cn(s.count, s.bottom)}>{values!==undefined?values.bottom:null}</div>
+                                <div className={cn(s.count, s.left)}>{values!==undefined?values.left:null}></div>
                             </div>
                             <div className={s.imgContainer}>
                                 <img src={img} alt={name} />

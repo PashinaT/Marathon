@@ -4,21 +4,18 @@ import GamePage from "./routes/Game";
 import AboutPage from "./routes/About";
 import ContactPage from "./routes/Contact";
 import NotFoundPage from "./routes/NotFound";
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch  } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect  } from "react-router-dom";
 import MenuHeader from "./components/MenuHeader";
 import Footer from "./components/Footer";
+// import database from "./service/firebase";
+
 
 function App() {
-    // const [page, setPage] = useState('app');
-    // const handleChangePage=(page)=>{
-    //
-    //     console.log("<Main/>");
-    //     setPage(page);
-    // };
+
     return (
         <BrowserRouter>
             <Switch>
+                <Route  path="/404" component={NotFoundPage}/>
                 <Route>
                     <>
                         <MenuHeader/>
@@ -28,12 +25,12 @@ function App() {
                             <Route path="/game" component={GamePage}/>
                             <Route path="/about" component={AboutPage}/>
                             <Route path="/contact" component={ContactPage}/>
-                            <Route component={NotFoundPage}/>
+                            <Route render={()=>{<Redirect to={"/404"}/>}}/>
                         </Switch>
                         <Footer/>
                     </>
                 </Route>
-                <Route component={NotFoundPage}/>
+
 
             </Switch>
         </BrowserRouter>
