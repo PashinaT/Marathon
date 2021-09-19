@@ -7,7 +7,6 @@ import NotFoundPage from "./routes/NotFound";
 import { BrowserRouter, Route, Switch, Redirect  } from "react-router-dom";
 import MenuHeader from "./components/MenuHeader";
 import Footer from "./components/Footer";
-// import database from "./service/firebase";
 
 
 function App() {

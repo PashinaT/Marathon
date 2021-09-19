@@ -1,6 +1,4 @@
-import s from "./style.module.css"
-import d from "../../data.json"
-import f from "../Home/style.module.css";
+import f from "./style.module.css";
 import PokemonCard from "../../components/PokemonCard";
 import database from "../../service/firebase";
 import { useState, useEffect } from 'react';
@@ -26,7 +24,12 @@ const GamePage =()=>{
     };
 
     const addPokemon = ()=>{
-        const newPokemon = database.ref().child('pokemons').push().key;
+        const newKey = database.ref().child('pokemons').push().key;
+        const data = Object.entries(openedPokemons)[0][1];
+        database.ref('pokemons/' + newKey).set(data);
+        database.ref('pokemons').once('value', (snapshot)=>{
+            setOpenPokemons(snapshot.val());
+        });
     };
 
     useEffect(()=>{
@@ -35,13 +38,19 @@ const GamePage =()=>{
         });
     },[]);
 return(
-
-            <div className={f.flex}>
-                {
-                    Object.entries(openedPokemons).map(([key,{name,img,id,type,values,active}])=>
-                        <PokemonCard key={key} onChangePockemon={()=> updateOpenedPockemons(id)} isActive={active}  name={name} img={img} id={id} type ={ type} values={values}/>)
-                }
-            </div>
+    <div  >
+        <div style={{padding:'70px',zIndex:'1000', position: 'relative', display: 'inline-block'}} >
+            <button  onClick={addPokemon}>
+                Add Pokemon!
+            </button>
+        </div>
+        <div className={f.flex}>
+            {
+                Object.entries(openedPokemons).map(([key,{name,img,id,type,values,active}])=>
+                    <PokemonCard key={key} onChangePockemon={()=> updateOpenedPockemons(id)} isActive={active}  name={name} img={img} id={id} type ={ type} values={values}/>)
+            }
+        </div>
+    </div>
 )
 };
 
