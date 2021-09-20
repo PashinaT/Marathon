@@ -7,11 +7,14 @@ import NotFoundPage from "./routes/NotFound";
 import { BrowserRouter, Route, Switch, Redirect  } from "react-router-dom";
 import MenuHeader from "./components/MenuHeader";
 import Footer from "./components/Footer";
+import {FireBaseContext} from "./context/FireBaseContext";
+import Firebase from "./service/firebase";
 
 
 function App() {
 
     return (
+        <FireBaseContext.Provider value={new Firebase()}>
         <BrowserRouter>
             <Switch>
                 <Route  path="/404" component={NotFoundPage}/>
@@ -33,16 +36,9 @@ function App() {
 
             </Switch>
         </BrowserRouter>
+        </FireBaseContext.Provider>
         );
 
-    // switch (page) {
-    //     case("app"):
-    //         return <HomePage onChangePage={handleChangePage}/>;
-    //     case ("game"):
-    //         return <GamePage onChangePage={handleChangePage}/>;
-    //     default:
-    //         return <HomePage onChangePage={handleChangePage} />;
-    // }
 }
 
 export default App;
