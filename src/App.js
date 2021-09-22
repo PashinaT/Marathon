@@ -21,14 +21,16 @@ function App() {
                 <Route>
                     <>
                         <MenuHeader/>
-                        <Switch>
-                            <Route path="/" exact component={HomePage}/>
-                            <Route path="/home" component={HomePage}/>
-                            <Route path="/game" component={GamePage}/>
-                            <Route path="/about" component={AboutPage}/>
-                            <Route path="/contact" component={ContactPage}/>
-                            <Route render={()=>{<Redirect to={"/404"}/>}}/>
-                        </Switch>
+                        <div className={s.wrap}>
+                            <Switch>
+                                <Route path="/" exact component={HomePage}/>
+                                <Route path="/home" component={HomePage}/>
+                                <Route path="/game" component={GamePage}/>
+                                <Route path="/about" component={AboutPage}/>
+                                <Route path="/contact" component={ContactPage}/>
+                                <Route render={()=>{<Redirect to={"/404"}/>}}/>
+                            </Switch>
+                        </div>
                         <Footer/>
                     </>
                 </Route>
