@@ -14,7 +14,7 @@ const StartPage =()=>{
     const selectPokemon = (key)=>
     {
         const pokemon = {...pokemons[key]};
-        pokemonContext.onSelectedPokemon(key, pokemon);
+        pokemonContext.onSelectedPokemons(key, pokemon);
         setpokemons(prevState=>({
             ...prevState,
             [key]:{
@@ -42,8 +42,8 @@ const StartPage =()=>{
         history.push('/game/board')
     };
     return(
-        <div  >
-            <div style={{padding:'70px',zIndex:'1000', position: 'relative', display: 'inline-block'}} >
+        <>
+            <div  style={{padding:'70px',zIndex:'1000', position: 'relative', display: 'inline-block'}} >
                 <button  onClick={startGame} disabled={Object.entries(pokemonContext.pokemon).length<5}>
                     Start Game
                 </button>
@@ -51,10 +51,10 @@ const StartPage =()=>{
             <div className={f.flex}>
                 {
                     Object.entries(pokemons).map(([key,{name,img,id,type,values,active,selected}])=>
-                        <PokemonCard key={key} className={f.card} isSelected={selected} onChangePockemon={()=>{ if (Object.entries(pokemonContext.pokemon).length<5 || selected) selectPokemon(key)}} isActive={active}  name={name} img={img} id={id} type ={ type} values={values}/>)
+                        <PokemonCard key={key} className={f.card} isSelected={selected} onChangePockemon={()=>{ if (Object.entries(pokemonContext.pokemon).length<5 || selected) selectPokemon(key)}} isActive={true}  name={name} img={img} id={id} type ={ type} values={values}/>)
                 }
             </div>
-        </div>
+        </>
     )
 };
 

@@ -3,12 +3,12 @@ import cardBack from "../../assets/card-back-side.jpg"
 import { useState } from 'react';
 import cn from 'classnames';
 
-const PokemonCard =({name,img,id,type,values,isActive,onChangePockemon,minimize ,className})=>{
+const PokemonCard =({name,img,id,type,values,isActive,isSelected,onChangePockemon,minimize ,className})=>{
 const handleClick = ()=>{
     onChangePockemon();
 };
     return(
-        <div className={cn(className, s.pokemonCard, {[s.active]: isActive})}>
+        <div className={cn(className, s.pokemonCard, {[s.active]: isActive, [s.selected]: isSelected})} onClick={handleClick}>
             <div className={s.cardFront}>
                 <div className={cn(s.wrap, s.front)}>
                     <div className={cn(s.pokemon, s[type])}>

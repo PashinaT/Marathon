@@ -22,7 +22,7 @@ const GamePage = () => {
                 ...prevState,
                 [key]:pokemon
             }
-        })
+        });
     };
     return (
         <PokemonContext.Provider value={{pokemon:selectedPokemons, onSelectedPokemons:handleSelectedPokemon}}>

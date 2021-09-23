@@ -60,6 +60,10 @@
     transform: rotateY(0deg);
     z-index: 2;
 }
+.pokemonCard:active .wrap.front::after,
+.pokemonCard:focus .wrap.front::after{
+    border-color: var(--rock);
+}
 
 .wrap {
     position: absolute;
