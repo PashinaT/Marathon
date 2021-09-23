@@ -4,14 +4,16 @@ import GamePage from "./routes/Game";
 import AboutPage from "./routes/About";
 import ContactPage from "./routes/Contact";
 import NotFoundPage from "./routes/NotFound";
-import { BrowserRouter, Route, Switch, Redirect  } from "react-router-dom";
+import {BrowserRouter, Route, Switch, Redirect, useLocation} from "react-router-dom";
 import MenuHeader from "./components/MenuHeader";
 import Footer from "./components/Footer";
 import {FireBaseContext} from "./context/FireBaseContext";
 import Firebase from "./service/firebase";
+import cn from 'classnames'
 
 
-function App() {
+const App = () => {
+
 
     return (
         <FireBaseContext.Provider value={new Firebase()}>
@@ -21,7 +23,7 @@ function App() {
                 <Route>
                     <>
                         <MenuHeader/>
-                        <div className={s.wrap}>
+                        <div className={cn(s.wrap,{[s.isHomePage]:true})}>
                             <Switch>
                                 <Route path="/" exact component={HomePage}/>
                                 <Route path="/home" component={HomePage}/>
@@ -41,6 +43,6 @@ function App() {
         </FireBaseContext.Provider>
         );
 
-}
+};
 
 export default App;

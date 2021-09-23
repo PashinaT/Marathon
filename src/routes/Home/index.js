@@ -1,8 +1,6 @@
 import './style.module.css';
 import Header from '../../components/Header'
 import Layout from '../../components/Layout'
-import Footer from '../../components/Footer'
-import MenuHeader from "../../components/MenuHeader";
 
 import bg1 from '../../assets/bg1.jpg';
 import PokemonCard from "../../components/PokemonCard";
