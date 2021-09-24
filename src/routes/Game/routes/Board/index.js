@@ -24,6 +24,7 @@ const counterWin = (board,player1,player2)=>{
 
 }
 const BoardPage = () => {
+    const pokemonContext = useContext(PokemonContext);
     const {pokemon} = useContext(PokemonContext);
     const [board, setBoard]= useState([]);
     const [player2, setPlayer2]= useState([]);
@@ -38,7 +39,6 @@ const BoardPage = () => {
 
     const history= useHistory();
 
-console.log(player2);
     useEffect(async ()=>{
         const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board')
         const boardRequest = await boardResponse.json();
@@ -55,7 +55,12 @@ console.log(player2);
 
         });
 
-        console.log( board);
+        pokemonContext.onGetCompPokemons(player2Request.data.map(item=>({
+            ...item,
+            possession:'red'
+        })));
+        // console.log( board);
+
     },[]);
 
     const handleClickBoardPlate = async (position) =>
@@ -105,7 +110,7 @@ console.log(player2);
 
             if(count1>count2)
             {
-                alert(' win ')
+                alert(' win ');
             } else if (count1<count2)
             {
                 alert(' lose')
@@ -113,6 +118,8 @@ console.log(player2);
         else{
             alert('draw')
             }
+
+            history.push('/game/finish')
         }
     },[steps]);
 

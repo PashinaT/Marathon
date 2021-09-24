@@ -7,6 +7,7 @@ import FinishPage from './routes/Finish'
 
 const GamePage = () => {
     const [selectedPokemons, setSelectedPokemons] = useState({});
+    const [compPokemons, setCompPokemons] = useState({});
     const match = useRouteMatch();
     const handleSelectedPokemon = (key, pokemon)=>{
 
@@ -24,8 +25,16 @@ const GamePage = () => {
             }
         });
     };
+
+    const handleGetCompPokemons=(pokemons)=>{
+        setCompPokemons(pokemons);
+    };
     return (
-        <PokemonContext.Provider value={{pokemon:selectedPokemons, onSelectedPokemons:handleSelectedPokemon}}>
+        <PokemonContext.Provider value={{pokemon:selectedPokemons,
+            onSelectedPokemons:handleSelectedPokemon,
+            compPokemons:compPokemons,
+            onGetCompPokemons:handleGetCompPokemons
+        }}>
             <Switch>
                 <Route path={`${match.path}/`} exact component={StartPage} />
                 <Route path={`${match.path}/board`} component={BoardPage} />
