@@ -3,13 +3,22 @@ import {useEffect,useState,useContext} from 'react'
 import s from "./style.module.css";
 import PokemonCard from "../../../../components/PokemonCard";
 import {useHistory} from "react-router-dom";
+import {FireBaseContext} from "../../../../context/FireBaseContext";
 
 const FinishPage = () => {
     const {pokemon,compPokemons} = useContext(PokemonContext);
+    const [chosenCard, setChosenCard] = useState(null);
+    const firebase = useContext(FireBaseContext);
     const history = useHistory();
 
     const handleButtonClick = ()=>{
+        firebase.addPokemon(chosenCard);
         history.replace('/game');
+    };
+
+    const choseCard = (item)=>{
+        setChosenCard(item);
+
     };
 
     return (
@@ -35,7 +44,7 @@ const FinishPage = () => {
             </div>
             <div className={s.flex}>
                 {compPokemons.map((item)=>(
-                    <div style={{marginTop:'80px'}}>
+                    <div style={{marginTop:'80px'}} onClick={()=>choseCard(item)}>
                         <PokemonCard
                             className={s.card}
                             name={item.name}
