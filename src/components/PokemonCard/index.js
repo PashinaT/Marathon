@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 const PokemonCard =({name,img,id,type,values,isActive,isSelected,onChangePockemon,minimize ,className})=>{
 const handleClick = ()=>{
-    onChangePockemon();
+    onChangePockemon && onChangePockemon();
 };
     return(
         <div className={cn(className, s.pokemonCard, {[s.active]: isActive, [s.selected]: isSelected})} onClick={handleClick}>
