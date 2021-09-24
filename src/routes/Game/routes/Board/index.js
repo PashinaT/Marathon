@@ -5,10 +5,29 @@ import {useHistory} from 'react-router-dom'
 import {useEffect,useState,useContext} from 'react'
 import PlayerBoard from "./component/PlayerBoard";
 
+const counterWin = (board,player1,player2)=>{
+    let player1Count = player1.length;
+    let player2Count = player2.length;
+
+    board.forEach(item=>{
+        if(item.card.possession === 'red')
+        {
+            player2Count++;
+        }
+        if(item.card.possession === 'blue')
+        {
+            player1Count++;
+        }
+    });
+
+    return [player1Count,player2Count];
+
+}
 const BoardPage = () => {
     const {pokemon} = useContext(PokemonContext);
     const [board, setBoard]= useState([]);
     const [player2, setPlayer2]= useState([]);
+    const[steps, setSteps]=useState(0);
     const [player1, setPlayer1]= useState(()=>{
         return Object.values(pokemon).map(item=>({
             ...item,
@@ -59,17 +78,48 @@ console.log(player2);
             });
 
             const request = await res.json();
-            setBoard(request.data);
 
-            console.log('iiii', request)
+
+            if(choiceCard.player===1)
+            {
+                setPlayer1(prevState => prevState.filter(item=>item.id !==choiceCard.id));
+            }
+
+            if(choiceCard.player===2)
+            {
+                setPlayer2(prevState => prevState.filter(item=>item.id !==choiceCard.id));
+            }
+
+            setBoard(request.data);
+            setSteps(prevState => {
+                const  count =prevState + 1;
+                return count;
+            })
         }
-        console.log(position);
-        console.log(choiceCard);
     }
-    // if(Object.values(pokemon).length ===0)
-    // {
-    //     history.replace('/game');
-    // }
+
+    useEffect(()=>{
+        if(steps===9)
+        {
+            const [count1,count2] = counterWin(board,player1,player2)
+
+            if(count1>count2)
+            {
+                alert(' win ')
+            } else if (count1<count2)
+            {
+                alert(' lose')
+            }
+        else{
+            alert('draw')
+            }
+        }
+    },[steps]);
+
+    if(Object.values(pokemon).length ===0)
+    {
+        history.replace('/game');
+    }
     return (
         <div className={s.root}>
             <div className={s.playerOne}>
