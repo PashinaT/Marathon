@@ -4,8 +4,8 @@ import s from "./style.module.css";
 import {useHistory} from 'react-router-dom'
 import {useEffect,useState,useContext} from 'react'
 import PlayerBoard from "./component/PlayerBoard";
-import {useSelector} from "react-redux";
-import {selectChosenPokemonsData} from "../../../../store/pokemons";
+import {useDispatch, useSelector} from "react-redux";
+import {selectChosenPokemonsData,setCompPokemons} from "../../../../store/pokemons";
 
 const counterWin = (board,player1,player2)=>{
     let player1Count = player1.length;
@@ -30,6 +30,7 @@ const BoardPage = () => {
     // const {pokemon} = useContext(PokemonContext);
     const [board, setBoard]= useState([]);
     const [result,setResult]=useState(null);
+    const dispatch =useDispatch();
     const chosenPokemonsRedux = useSelector(selectChosenPokemonsData);
     const [player2, setPlayer2]= useState([]);
     const[steps, setSteps]=useState(0);
@@ -59,10 +60,14 @@ const BoardPage = () => {
 
         });
 
-        pokemonContext.onGetCompPokemons(player2Request.data.map(item=>({
+        dispatch(setCompPokemons(player2Request.data.map(item=>({
             ...item,
             possession:'red'
-        })));
+        }))));
+        // pokemonContext.onGetCompPokemons(player2Request.data.map(item=>({
+        //     ...item,
+        //     possession:'red'
+        // })));
         // console.log( board);
 
     },[]);

@@ -15,7 +15,7 @@ import {
 
 
 const StartPage =()=>{
-    const pokemonContext = useContext(PokemonContext);
+    // const pokemonContext = useContext(PokemonContext);
     const history = useHistory();
     const dispatch =useDispatch();
     const pokemonsRedux = useSelector(selectPokemonsData);
