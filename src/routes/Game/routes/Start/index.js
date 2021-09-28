@@ -22,7 +22,7 @@ const StartPage =()=>{
     const chosenPokemonsRedux = useSelector(selectChosenPokemonsData);
     const isLoading = useSelector(selectPokemonsLoading);
     const [pokemons, setpokemons]= useState({});
-    const [chosenPokemons, setChosenPokemon]= useState([]);
+    const [chosenPokemons, setChosenPokemon]= useState({});
 
     const selectPokemon = (key)=>
     {
@@ -66,14 +66,14 @@ const StartPage =()=>{
     return(
         <>
             <div  style={{padding:'70px',zIndex:'1000', position: 'relative', display: 'inline-block'}} >
-                <button  onClick={startGame} disabled={Object.entries(pokemonContext.pokemon).length<5}>
+                <button  onClick={startGame} disabled={Object.entries(chosenPokemons).length<5}>
                     Start Game
                 </button>
             </div>
             <div className={f.flex}>
                 {
                     Object.entries(pokemons).map(([key,{name,img,id,type,values,active,selected}])=>
-                        <PokemonCard key={key} className={f.card} isSelected={selected} onChangePockemon={()=>{ if (Object.entries(pokemonContext.pokemon).length<5 || selected) selectPokemon(key)}} isActive={true}  name={name} img={img} id={id} type ={ type} values={values}/>)
+                        <PokemonCard key={key} className={f.card} isSelected={selected} onChangePockemon={()=>{ if (Object.entries(chosenPokemons).length<5 || selected) selectPokemon(key)}} isActive={true}  name={name} img={img} id={id} type ={ type} values={values}/>)
                 }
             </div>
         </>
