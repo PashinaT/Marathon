@@ -28,4 +28,12 @@ export const getPokemonsAsync =()=>  async(dispatch)=>{
 
 }
 
+export const addPokemonAsync =(pokemon)=>  async(dispatch)=>{
+
+    await FireBaseClass.addPokemon(pokemon);
+    dispatch(getPokemonsAsync());
+
+};
+
+
 export default slice.reducer;

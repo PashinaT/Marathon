@@ -17,7 +17,7 @@ const StartPage =()=>{
     const isLoading = useSelector(selectPokemonsLoading);
     const [pokemons, setpokemons]= useState({});
     console.log('jjjjj');
-    console.log(pokemonsRedux)
+    console.log(pokemonsRedux);
     const selectPokemon = (key)=>
     {
         const pokemon = {...pokemons[key]};
@@ -28,13 +28,7 @@ const StartPage =()=>{
                 ...prevState[key],
                 selected:!prevState[key].selected,
             }
-
         }))
-    };
-
-    const addPokemon = ()=>{
-        const data = Object.entries(pokemons)[0][1];
-        firebase.addPokemon(data);
     };
 
     useEffect(()=>{

@@ -4,15 +4,17 @@ import s from "./style.module.css";
 import PokemonCard from "../../../../components/PokemonCard";
 import {useHistory} from "react-router-dom";
 import {FireBaseContext} from "../../../../context/FireBaseContext";
+import {useDispatch} from "react-redux";
+import {addPokemonAsync} from "../../../../store/pokemons";
 
 const FinishPage = () => {
     const {pokemon,compPokemons} = useContext(PokemonContext);
     const [chosenCard, setChosenCard] = useState(null);
-    const firebase = useContext(FireBaseContext);
+    const dispatch =useDispatch();
     const history = useHistory();
 
     const handleButtonClick = ()=>{
-        firebase.addPokemon(chosenCard);
+        dispatch(addPokemonAsync(chosenCard));
         history.replace('/game');
     };
 
