@@ -22,11 +22,12 @@ const counterWin = (board,player1,player2)=>{
 
     return [player1Count,player2Count];
 
-}
+};
 const BoardPage = () => {
     const pokemonContext = useContext(PokemonContext);
     const {pokemon} = useContext(PokemonContext);
     const [board, setBoard]= useState([]);
+    const [result,setResult]=useState(null);
     const [player2, setPlayer2]= useState([]);
     const[steps, setSteps]=useState(0);
     const [player1, setPlayer1]= useState(()=>{
