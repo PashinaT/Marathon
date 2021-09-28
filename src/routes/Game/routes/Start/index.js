@@ -5,30 +5,46 @@ import { useState, useEffect,useContext } from 'react';
 import {FireBaseContext} from "../../../../context/FireBaseContext";
 import {PokemonContext} from "../../../../context/PokemonContext";
 import {useDispatch, useSelector} from "react-redux";
-import {getPokemonsAsync, selectPokemonsData, selectPokemonsLoading} from "../../../../store/pokemons";
+import {
+    getPokemonsAsync,
+    selectChosenPokemonsData,
+    selectPokemonsData,
+    selectPokemonsLoading,
+    setChosenPokemons,
+} from "../../../../store/pokemons";
 
 
 const StartPage =()=>{
-    const firebase = useContext(FireBaseContext);
     const pokemonContext = useContext(PokemonContext);
     const history = useHistory();
     const dispatch =useDispatch();
     const pokemonsRedux = useSelector(selectPokemonsData);
+    const chosenPokemonsRedux = useSelector(selectChosenPokemonsData);
     const isLoading = useSelector(selectPokemonsLoading);
     const [pokemons, setpokemons]= useState({});
-    console.log('jjjjj');
-    console.log(pokemonsRedux);
+    const [chosenPokemons, setChosenPokemon]= useState([]);
+
     const selectPokemon = (key)=>
     {
         const pokemon = {...pokemons[key]};
-        pokemonContext.onSelectedPokemons(key, pokemon);
         setpokemons(prevState=>({
             ...prevState,
             [key]:{
                 ...prevState[key],
                 selected:!prevState[key].selected,
             }
-        }))
+        }));
+
+        if(chosenPokemons[key])
+        {
+            const copyPokemons = {...chosenPokemons};
+            delete copyPokemons[key];
+            dispatch(setChosenPokemons(copyPokemons))
+        }
+        else{
+            const copyPokemons = {...chosenPokemons,[key]:pokemon};
+            dispatch(setChosenPokemons(copyPokemons));
+        }
     };
 
     useEffect(()=>{
@@ -38,6 +54,10 @@ const StartPage =()=>{
     useEffect(()=>{
         setpokemons(pokemonsRedux)
     },[pokemonsRedux]);
+
+    useEffect(()=>{
+        setChosenPokemon(chosenPokemonsRedux)
+    },[chosenPokemonsRedux]);
 
     const startGame =()=>{
 
