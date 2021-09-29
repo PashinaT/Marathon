@@ -1,11 +1,11 @@
-import {PokemonContext} from "../../../../context/PokemonContext";
 import PokemonCard from "../../../../components/PokemonCard";
 import s from "./style.module.css";
 import {useHistory} from 'react-router-dom'
 import {useEffect,useState,useContext} from 'react'
 import PlayerBoard from "./component/PlayerBoard";
 import {useDispatch, useSelector} from "react-redux";
-import {selectChosenPokemonsData,setCompPokemons} from "../../../../store/pokemons";
+import {selectChosenPokemonsData,setCompPokemons,selectCompPokemonsData} from "../../../../store/pokemons";
+import {setResult} from "../../../../store/result"
 
 const counterWin = (board,player1,player2)=>{
     let player1Count = player1.length;
@@ -26,12 +26,10 @@ const counterWin = (board,player1,player2)=>{
 
 };
 const BoardPage = () => {
-    const pokemonContext = useContext(PokemonContext);
-    // const {pokemon} = useContext(PokemonContext);
     const [board, setBoard]= useState([]);
-    const [result,setResult]=useState(null);
     const dispatch =useDispatch();
     const chosenPokemonsRedux = useSelector(selectChosenPokemonsData);
+    const compPokemonsRedux = useSelector(selectCompPokemonsData);
     const [player2, setPlayer2]= useState([]);
     const[steps, setSteps]=useState(0);
     const [player1, setPlayer1]= useState(()=>{
@@ -60,17 +58,19 @@ const BoardPage = () => {
 
         });
 
-        dispatch(setCompPokemons(player2Request.data.map(item=>({
+        const player = player2Request.data.map(item=>({
             ...item,
             possession:'red'
-        }))));
-        // pokemonContext.onGetCompPokemons(player2Request.data.map(item=>({
-        //     ...item,
-        //     possession:'red'
-        // })));
-        // console.log( board);
+        }));
+
+        dispatch(setCompPokemons(player));
 
     },[]);
+
+    useEffect(()=>{
+        setPlayer2(compPokemonsRedux)
+    },[compPokemonsRedux]);
+
 
     const handleClickBoardPlate = async (position) =>
     {
@@ -120,12 +120,15 @@ const BoardPage = () => {
             if(count1>count2)
             {
                 alert(' win ');
+                dispatch(setResult("win"));
             } else if (count1<count2)
             {
-                alert(' lose')
+                alert(' lose');
+                dispatch(setResult("lose"));
             }
         else{
-            alert('draw')
+            alert('draw');
+                dispatch(setResult("draw"));
             }
 
             history.push('/game/finish')

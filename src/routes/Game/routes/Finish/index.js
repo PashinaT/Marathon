@@ -4,11 +4,17 @@ import s from "./style.module.css";
 import PokemonCard from "../../../../components/PokemonCard";
 import {useHistory} from "react-router-dom";
 import {FireBaseContext} from "../../../../context/FireBaseContext";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addPokemonAsync} from "../../../../store/pokemons";
+import {selectChosenPokemonsData,selectCompPokemonsData} from "../../../../store/pokemons";
+import {selectResult} from "../../../../store/result";
 
 const FinishPage = () => {
-    const {pokemon,compPokemons} = useContext(PokemonContext);
+
+
+    const chosenPokemonsRedux = useSelector(selectChosenPokemonsData);
+    const compPokemonsRedux = useSelector(selectCompPokemonsData);
+    const result = useSelector(selectResult);
     const [chosenCard, setChosenCard] = useState(null);
     const dispatch =useDispatch();
     const history = useHistory();
@@ -26,7 +32,7 @@ const FinishPage = () => {
     return (
         <div >
             <div className={s.flex}>
-                {Object.values(pokemon).map((item)=>(
+                {Object.values(chosenPokemonsRedux).map((item)=>(
                     <div style={{marginTop:'80px'}}>
                         <PokemonCard
                             className={s.card}
@@ -42,11 +48,11 @@ const FinishPage = () => {
                 ))}
             </div>
             <div style={{padding:'70px',zIndex:'1000', position: 'relative', display: 'inline-block'}}>
-                <button className={s.button} onClick={handleButtonClick}>EndGame</button>
+                <button className={s.button} disabled={result==="win" && chosenCard===null} onClick={handleButtonClick}>EndGame</button>
             </div>
             <div className={s.flex}>
-                {compPokemons.map((item)=>(
-                    <div style={{marginTop:'80px'}} onClick={()=>choseCard(item)}>
+                {compPokemonsRedux.map((item)=>(
+                    <div style={{marginTop:'80px'}} onClick={()=>result==="win"?choseCard(item):console.log("no")}>
                         <PokemonCard
                             className={s.card}
                             name={item.name}
