@@ -7,8 +7,6 @@ import NotFoundPage from "./routes/NotFound";
 import {BrowserRouter, Route, Switch, Redirect, useLocation} from "react-router-dom";
 import MenuHeader from "./components/MenuHeader";
 import Footer from "./components/Footer";
-import {FireBaseContext} from "./context/FireBaseContext";
-import Firebase from "./service/firebase";
 import cn from 'classnames'
 
 
@@ -16,7 +14,6 @@ const App = () => {
 
 
     return (
-        <FireBaseContext.Provider value={new Firebase()}>
         <BrowserRouter>
             <Switch>
                 <Route  path="/404" component={NotFoundPage}/>
@@ -40,7 +37,6 @@ const App = () => {
 
             </Switch>
         </BrowserRouter>
-        </FireBaseContext.Provider>
         );
 
 };
