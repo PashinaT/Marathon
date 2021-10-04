@@ -40,9 +40,15 @@ export const getPokemonsAsync =()=>  async(dispatch, getState)=>{
 
 }
 
-export const addPokemonAsync =(pokemon)=>  async(dispatch)=>{
+export const addPokemonAsync =(pokemon)=>  async(dispatch,getState)=>{
 
-    await FireBaseClass.addPokemon(pokemon);
+    const localId = selectUserLocalId(getState());
+
+    await FireBaseClass.addPokemon(pokemon,localId);
+    await fetch(`https://pokemon-game-6e0fb-default-rtdb.firebaseio.com/${localId}/pokemons.json`,{
+        method:'POST',
+        body:JSON.stringify(pokemon)
+    });
     dispatch(getPokemonsAsync());
 
 };

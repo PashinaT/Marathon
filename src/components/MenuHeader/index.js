@@ -54,8 +54,6 @@ const MenuHeader =()=>{
                         body:JSON.stringify(item)
                     })
                 }
-                console.log(pokemonsStart)
-
             }
         }
     };
