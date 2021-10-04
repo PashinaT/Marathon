@@ -3,6 +3,7 @@ import HomePage from "./routes/Home"
 import GamePage from "./routes/Game";
 import AboutPage from "./routes/About";
 import ContactPage from "./routes/Contact";
+import UserPage from "./routes/UserPage";
 import NotFoundPage from "./routes/NotFound";
 import {BrowserRouter, Route, Switch, Redirect, useLocation} from "react-router-dom";
 import MenuHeader from "./components/MenuHeader";
@@ -41,6 +42,7 @@ const App = () => {
                                 <PrivateRoute path="/game" component={GamePage}/>
                                 <PrivateRoute path="/about" component={AboutPage}/>
                                 <PrivateRoute path="/contact" component={ContactPage}/>
+                                <PrivateRoute path="/user" component={UserPage}/>
                                 <Route render={()=>{<Redirect to={"/404"}/>}}/>
                             </Switch>
                         </div>
