@@ -11,10 +11,22 @@ import cn from 'classnames'
 import {NotificationContainer} from 'react-notifications'
 import 'react-notifications/lib/notifications.css'
 import PrivateRoute from './components/PrivateRoute'
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserAsync, selectUserLoading} from "./store/users";
 
 const App = () => {
 
+    const isUserLoading = useSelector(selectUserLoading);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getUserAsync());
+    },[])
 
+    if (isUserLoading)
+    {
+        return "Loading"
+    }
     return (
         <BrowserRouter>
             <Switch>
