@@ -1,14 +1,19 @@
 import s from "./style.module.css"
 import cn from 'classnames'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Input from "../Input";
 
-const LoginForm =({onSubmit})=>{
+const LoginForm =({onSubmit, isResetFill=false})=>{
 
     const [email,setEmail]=useState(null);
     const [password,setPassword]=useState(null);
     const [loginForm,setLoginForm]=useState(true);
 
+    useEffect(()=>{
+
+        setEmail(null);
+        setPassword(null)
+    },[isResetFill]);
     const handleClick = (e) =>{
 
         e.preventDefault();
